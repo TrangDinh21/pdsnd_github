@@ -45,3 +45,41 @@ def get_userinputs():
 
     print('-'*70, '\n')
     return city, month, day
+
+def load_data(city, month, day):
+    """
+    Loads data for the specified city and filters by month and day if applicable.
+
+    Args:
+        1. city - name of the city to analyze
+        2. month - name of the month to filter by, or "all" to apply no month filter
+        3. day - name of the day of week to filter by, or "all" to apply no day filter
+    Returns:
+        dataFrame - Pandas DataFrame containing city data filtered by month and day
+    """
+    print("\n Filters applied : [ {}, {}, {}] ".format(city, month, day).center(78, '*'))
+    print()
+
+    # load data file into a dataframe
+    dataFrame = pd.read_csv(CITY_LIST[city])
+
+    # convert Start Time column to datetime type
+    dataFrame['Start Time'] = pd.to_datetime(dataFrame['Start Time'])
+
+    # create new columns from month and day of week from Start Time extracted
+    dataFrame['month'] = dataFrame['Start Time'].dt.month
+    dataFrame['day_of_week'] = dataFrame['Start Time'].dt.day_name()
+
+    # filter by month if available
+    if month != 'all':
+        months = ['january', 'february', 'march', 'april', 'may', 'june']
+        month = months.index(month) + 1
+       
+        dataFrame = dataFrame[dataFrame['month'] == month]
+
+    # filter by day of week if available
+    if day != 'all':
+        # filter by day of week to create the new dataframe
+        dataFrame = dataFrame[dataFrame['day_of_week'] == day.title()]
+
+    return dataFrame
