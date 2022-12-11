@@ -4,10 +4,10 @@
 Include the date you created this project and README file.
 
 ### Project Title
-Replace the Project Title
+Programming for Data Science Nanodegree Program
 
 ### Description
-Describe what your project is about and what it does
+This project includes the use of Git and GitHub
 
 ### Files used
 Include the files used
