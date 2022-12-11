@@ -83,3 +83,11 @@ def load_data(city, month, day):
         dataFrame = dataFrame[dataFrame['day_of_week'] == day.title()]
 
     return dataFrame
+
+def main():
+        city, month, day = get_userinputs()
+        dataFrame = load_data(city, month, day)
+
+
+if __name__ == "__main__":
+    main()
